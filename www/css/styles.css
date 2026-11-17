@@ -2579,6 +2579,191 @@ button, input, select {
 }
 
 @media (max-width: 640px) {
+  /* Full-screen distraction-free fit during active quest/battle */
+  body.quest-active .app-header,
+  body.quest-active .app-bottom-nav {
+    display: none;
+  }
+  body.quest-active .app-main {
+    padding: max(8px, env(safe-area-inset-top)) 10px max(10px, env(safe-area-inset-bottom));
+    height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  body.quest-active .quest-play-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: hidden;
+  }
+  body.quest-active .quest-top-bar {
+    margin-bottom: 6px;
+    gap: 8px;
+    flex-wrap: nowrap;
+  }
+  body.quest-active .btn-back-map {
+    padding: 6px 10px;
+    font-size: 0.82rem;
+    border-radius: 10px;
+    white-space: nowrap;
+  }
+  body.quest-active .quest-progress-labels {
+    font-size: 0.75rem;
+    margin-bottom: 3px;
+  }
+  body.quest-active .quest-progress-bar {
+    height: 10px;
+  }
+  body.quest-active .standard-code-pill {
+    display: none;
+  }
+
+  /* Compact MathHero Arena on Mobile */
+  body.quest-active .hero-battle-arena {
+    padding: 8px 10px;
+    margin-bottom: 8px;
+    border-width: 3px;
+    border-radius: 16px;
+    flex-shrink: 0;
+  }
+  body.quest-active .battle-hud-row {
+    margin-bottom: 6px;
+    gap: 6px;
+  }
+  body.quest-active .hud-fighter {
+    min-width: 0;
+    gap: 6px;
+  }
+  body.quest-active .hud-avatar-badge {
+    width: 34px;
+    height: 34px;
+    font-size: 1.25rem;
+    border-radius: 10px;
+  }
+  body.quest-active .hud-name {
+    font-size: 0.78rem;
+  }
+  body.quest-active .hero-charge-meter {
+    font-size: 0.68rem;
+  }
+  body.quest-active .charge-pip {
+    width: 18px;
+    height: 18px;
+    font-size: 0.65rem;
+  }
+  body.quest-active .boss-hp-numbers {
+    font-size: 0.7rem;
+  }
+  body.quest-active .boss-hp-bar-outer {
+    height: 10px;
+  }
+  body.quest-active .battle-stage-floor {
+    min-height: 62px;
+    padding: 4px 10px;
+    border-radius: 12px;
+  }
+  body.quest-active .hero-aura-ring {
+    width: 52px;
+    height: 52px;
+  }
+  body.quest-active .fighter-main-emoji {
+    font-size: 2.3rem;
+  }
+  body.quest-active .hero-weapon-badge {
+    font-size: 0.9rem;
+  }
+  body.quest-active .boss-speech-bubble {
+    display: none;
+  }
+
+  /* Compact Question Stage & Manipulative on Mobile */
+  body.quest-active .question-stage-card {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 10px 12px;
+    border-width: 3px;
+    border-radius: 18px;
+    min-height: 0;
+    overflow-y: auto;
+  }
+  body.quest-active .question-prompt-row {
+    gap: 8px;
+    margin-bottom: 6px;
+  }
+  body.quest-active .btn-speak-prompt {
+    width: 40px;
+    height: 40px;
+    font-size: 1.2rem;
+  }
+  body.quest-active .question-prompt-text {
+    font-size: 0.98rem;
+    line-height: 1.2;
+  }
+  body.quest-active .btn-hint-pill {
+    padding: 6px 10px;
+    font-size: 0.78rem;
+    border-radius: 12px;
+  }
+  body.quest-active .manipulative-stage {
+    margin-bottom: 8px;
+  }
+  body.quest-active .manipulative-card {
+    padding: 8px;
+  }
+  body.quest-active .manipulative-hint {
+    font-size: 0.74rem;
+    margin-bottom: 6px;
+  }
+  body.quest-active .manipulative-caption {
+    margin-top: 6px;
+    font-size: 0.92rem;
+  }
+  body.quest-active .analog-clock-svg,
+  body.quest-active .shape-svg {
+    width: 112px;
+    height: 112px;
+  }
+  body.quest-active .bar-chart-grid {
+    height: 108px;
+    gap: 12px;
+  }
+  body.quest-active .canadian-coins-tray {
+    gap: 8px;
+    padding: 2px;
+  }
+
+  /* Keep 2x2 Grid on Mobile so all 4 buttons fit without scrolling */
+  .choices-grid-2x2 {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+  .choice-giant-btn {
+    min-height: 54px;
+    font-size: 1.12rem;
+    padding: 8px 10px;
+    border-radius: 14px;
+    border-width: 3px;
+    box-shadow: 0 4px 0 #CBD5E1;
+  }
+  body.quest-active .quest-feedback-banner {
+    margin-top: 8px;
+    padding: 8px 12px;
+    gap: 8px;
+    border-radius: 12px;
+  }
+  body.quest-active .feedback-text {
+    font-size: 0.84rem;
+    line-height: 1.25;
+  }
+  body.quest-active .btn-next-question {
+    padding: 8px 14px;
+    font-size: 0.92rem;
+    border-radius: 10px;
+  }
+
   .app-header {
     padding: 8px 12px;
     padding-top: max(8px, env(safe-area-inset-top));
@@ -2623,27 +2808,19 @@ button, input, select {
     text-overflow: ellipsis;
     max-width: 100%;
   }
-  .choices-grid-2x2 {
-    grid-template-columns: 1fr;
-  }
-  .choice-giant-btn {
-    min-height: 68px;
-    font-size: 1.3rem;
-  }
   .ten-frame-grid {
-    grid-template-columns: repeat(5, 50px);
-    grid-template-rows: repeat(2, 50px);
+    grid-template-columns: repeat(5, 42px);
+    grid-template-rows: repeat(2, 42px);
+    gap: 4px;
+    padding: 5px;
+  }
+  .tf-cell {
+    font-size: 1.45rem;
   }
   .battle-prompt-callout {
     display: none;
   }
   .hud-vs-emblem {
     display: none;
-  }
-  .fighter-main-emoji {
-    font-size: 2.8rem;
-  }
-  .question-prompt-text {
-    font-size: 1.2rem;
   }
 }

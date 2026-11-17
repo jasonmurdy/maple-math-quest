@@ -679,6 +679,7 @@ class MapleMathApp {
   }
 
   render() {
+    document.body.classList.toggle('quest-active', this.currentView === 'quest');
     this.renderHeaderBar();
     this.renderBottomNav();
 
