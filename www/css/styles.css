@@ -2578,7 +2578,255 @@ button, input, select {
   transform: scale(0.97);
 }
 
+.hint-overlay-card {
+  border-color: #F59E0B;
+  background: #FFFBEB;
+}
+
+.hint-overlay-text {
+  font-size: 1.15rem;
+  line-height: 1.45;
+  font-weight: 800;
+  color: #78350F;
+  margin: 10px 0 18px;
+}
+
+.swipe-hint-pill,
+.swipe-hint-inline {
+  display: none;
+}
+
 @media (max-width: 640px) {
+  .swipe-hint-pill {
+    display: inline-block;
+    background: #F1F5F9;
+    color: var(--ink-muted);
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-size: 0.76rem;
+    font-weight: 800;
+  }
+  .swipe-hint-inline {
+    display: inline;
+    font-size: 0.74rem;
+    font-weight: 800;
+    color: var(--ink-muted);
+    margin-left: 6px;
+  }
+
+  /* Fit Home, MathHero, Grades, Stickers into 1 mobile viewport without vertical scroll */
+  body:not(.quest-active) .app-main {
+    padding: 10px 12px 78px;
+    height: calc(100dvh - 60px);
+    overflow-y: auto;
+  }
+  .mobile-fit-view {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: space-between;
+  }
+  .hero-region-banner {
+    padding: 10px 14px;
+    gap: 10px;
+    margin-bottom: 10px;
+    flex-wrap: nowrap;
+  }
+  .hero-mascot-bubble {
+    width: 48px;
+    height: 48px;
+    font-size: 2rem;
+  }
+  .hero-banner-text {
+    min-width: 0;
+  }
+  .hero-division-tag {
+    font-size: 0.68rem;
+    padding: 2px 8px;
+    margin-bottom: 2px;
+  }
+  .hero-grade-title {
+    font-size: 1.15rem;
+    margin: 0;
+  }
+  .hero-grade-desc {
+    font-size: 0.78rem;
+  }
+  .hero-change-grade-btn {
+    padding: 8px 12px;
+    font-size: 0.8rem;
+    border-radius: 12px;
+    white-space: nowrap;
+  }
+
+  .mathhero-promo-banner {
+    padding: 10px 14px;
+    margin-bottom: 10px;
+    flex-wrap: nowrap;
+    gap: 10px;
+  }
+  .mh-promo-left {
+    min-width: 0;
+    gap: 10px;
+  }
+  .mh-promo-avatar {
+    width: 46px;
+    height: 46px;
+    font-size: 1.8rem;
+  }
+  .mh-promo-title {
+    font-size: 1.05rem;
+  }
+  .mh-promo-sub {
+    font-size: 0.74rem;
+  }
+  .mh-promo-btn {
+    padding: 10px 14px;
+    font-size: 0.85rem;
+    border-radius: 12px;
+    white-space: nowrap;
+  }
+
+  .strands-trail-header {
+    margin-bottom: 8px;
+  }
+  .strands-trail-header h2 {
+    font-size: 1.05rem;
+  }
+
+  /* Horizontal Snap-Scroll Carousels on Mobile */
+  .h-carousel {
+    display: flex !important;
+    flex-direction: row !important;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: 12px;
+    padding: 12px 4px 10px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .h-carousel::-webkit-scrollbar,
+  .h-carousel-row::-webkit-scrollbar {
+    display: none;
+  }
+  .h-snap-card {
+    flex: 0 0 82%;
+    scroll-snap-align: center;
+    margin-top: 4px;
+  }
+  .strand-quest-card.h-snap-card {
+    padding: 18px 14px 14px;
+  }
+  .strand-card-body {
+    flex-direction: column;
+    text-align: center;
+    gap: 8px;
+  }
+  .strand-icon-circle {
+    width: 56px;
+    height: 56px;
+    font-size: 2rem;
+  }
+  .strand-title {
+    font-size: 1.15rem;
+  }
+  .strand-desc {
+    font-size: 0.8rem;
+    margin-bottom: 6px;
+  }
+  .strand-meta-row {
+    justify-content: center;
+  }
+  .strand-play-btn {
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+  }
+
+  /* MathHero HQ Compact Horizontal Rows */
+  .hero-arena-header-card {
+    padding: 10px 14px;
+    gap: 10px;
+    margin-bottom: 10px;
+    flex-wrap: nowrap;
+  }
+  .hero-showcase-avatar {
+    width: 52px;
+    height: 52px;
+    font-size: 2rem;
+  }
+  .hero-showcase-info {
+    min-width: 0;
+  }
+  .hero-showcase-info h1 {
+    font-size: 1.05rem;
+    margin: 2px 0 0;
+  }
+  .hero-rank-pill {
+    font-size: 0.68rem;
+    padding: 2px 8px;
+  }
+  .btn-launch-hero-giant {
+    padding: 10px 14px;
+    font-size: 0.9rem;
+    border-radius: 12px;
+    white-space: nowrap;
+  }
+  .hero-builder-section {
+    padding: 10px 12px;
+    margin-bottom: 8px;
+    border-radius: 16px;
+  }
+  .hero-builder-section h2 {
+    font-size: 0.92rem;
+    margin-bottom: 6px;
+  }
+  .h-carousel-row {
+    display: flex !important;
+    flex-direction: row !important;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: 8px;
+    padding-bottom: 2px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .h-snap-chip {
+    flex: 0 0 135px;
+    scroll-snap-align: start;
+    padding: 8px;
+  }
+  .suit-card-emoji, .boss-card-emoji {
+    width: 42px;
+    height: 42px;
+    font-size: 1.65rem;
+    margin-bottom: 4px;
+  }
+  .suit-card-name, .boss-card-name {
+    font-size: 0.8rem;
+  }
+  .suit-card-desc, .boss-card-title {
+    font-size: 0.68rem;
+  }
+  .hero-strand-pill, .hero-len-btn {
+    flex-shrink: 0;
+    padding: 6px 12px;
+    font-size: 0.78rem;
+  }
+  .hero-length-row {
+    margin-bottom: 0;
+  }
+
+  .section-heading-box {
+    margin-bottom: 8px;
+  }
+  .section-heading-box h1 {
+    font-size: 1.25rem;
+  }
+  .section-heading-box p {
+    font-size: 0.84rem;
+  }
+
   /* Full-screen distraction-free fit during active quest/battle */
   body.quest-active .app-header,
   body.quest-active .app-bottom-nav {

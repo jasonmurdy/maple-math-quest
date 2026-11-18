@@ -724,7 +724,7 @@ class MapleMathApp {
       const starDisplay = '⭐'.repeat(prog.stars) + '☆'.repeat(3 - prog.stars);
 
       return `
-        <div class="strand-quest-card" style="border-color: ${strand.color};" onclick="app.openTopicSelector('${gradeObj.id}', '${strand.id}')">
+        <div class="strand-quest-card h-snap-card" style="border-color: ${strand.color};" onclick="app.openTopicSelector('${gradeObj.id}', '${strand.id}')">
           <div class="strand-step-badge" style="background: ${strand.color}">Stop ${idx + 1} • ${strand.code}</div>
           <div class="strand-card-body">
             <div class="strand-icon-circle" style="background: ${strand.badgeBg}">${strand.icon}</div>
@@ -733,7 +733,7 @@ class MapleMathApp {
               <p class="strand-desc">${strand.subtitle}</p>
               <div class="strand-meta-row">
                 <span class="strand-stars" aria-label="${prog.stars} out of 3 stars">${starDisplay}</span>
-                <span class="strand-completed-pill">${prog.completed > 0 ? `Played ${prog.completed}×` : 'New Quest!'}</span>
+                <span class="strand-completed-pill">${prog.completed > 0 ? `Played ${prog.completed}×` : 'New!'}</span>
               </div>
             </div>
             <button type="button" class="strand-play-btn" style="background: ${strand.color}">
@@ -744,38 +744,38 @@ class MapleMathApp {
     }).join('');
 
     return `
-      <section class="view-container">
+      <section class="view-container mobile-fit-view">
         <div class="hero-region-banner" style="background: ${gradeObj.bgGradient}">
           <div class="hero-mascot-bubble">${gradeObj.mascot}</div>
           <div class="hero-banner-text">
             <div class="hero-division-tag">🇨🇦 ${gradeObj.division} • ${gradeObj.ageRange}</div>
-            <h1 class="hero-grade-title">${gradeObj.name}: ${gradeObj.regionTheme}</h1>
-            <p class="hero-grade-desc">Guide <strong>${gradeObj.mascotName}</strong> through all 5 Canadian Math Curriculum Strands! ${gradeObj.description}</p>
+            <h1 class="hero-grade-title">${gradeObj.name}</h1>
+            <p class="hero-grade-desc">${gradeObj.regionTheme}</p>
           </div>
           <button type="button" class="hero-change-grade-btn" onclick="app.setView('grades')">
-            Switch Grade 🎓
+            Grade 🎓
           </button>
         </div>
 
-        <!-- MathHero Action Banner -->
+        <!-- Compact MathHero Action Strip -->
         <div class="mathhero-promo-banner" onclick="app.setView('hero')">
           <div class="mh-promo-left">
             <div class="mh-promo-avatar">${suit.icon}<span>⚡</span></div>
             <div class="mh-promo-text">
-              <div class="mh-promo-tag">${rankInfo.current.badge} ${rankInfo.current.title} • ⚡ ${prof.heroXp || 0} XP</div>
-              <h2 class="mh-promo-title">⚡ MathHero Battle Arena!</h2>
-              <p class="mh-promo-sub">Suit up as <strong>${suit.name}</strong>, fire Super Math Beams, and defeat goofy Math Bosses!</p>
+              <div class="mh-promo-tag">${rankInfo.current.badge} ${prof.heroXp || 0} XP</div>
+              <h2 class="mh-promo-title">⚡ MathHero Battle</h2>
+              <p class="mh-promo-sub">Blast bosses with ${suit.name}!</p>
             </div>
           </div>
-          <button type="button" class="mh-promo-btn">⚡ Enter Hero Mode ▶</button>
+          <button type="button" class="mh-promo-btn">Battle ▶</button>
         </div>
 
         <div class="strands-trail-header">
-          <h2>🧭 Choose a Canadian Curriculum Trail</h2>
-          <span class="offline-ready-badge">⚡ 100% Offline Ready</span>
+          <h2>🧭 Pick a Math Trail</h2>
+          <span class="swipe-hint-pill">← Swipe →</span>
         </div>
 
-        <div class="strands-trail-grid">
+        <div class="strands-trail-grid h-carousel">
           ${strandCardsHtml}
         </div>
       </section>`;
@@ -791,20 +791,19 @@ class MapleMathApp {
     const suitsHtml = window.HERO_SUITS.map(s => {
       const selected = s.id === activeSuitId;
       return `
-        <button type="button" class="hero-suit-card ${selected ? 'selected-suit' : ''}"
+        <button type="button" class="hero-suit-card h-snap-chip ${selected ? 'selected-suit' : ''}"
           style="border-color: ${selected ? s.color : 'var(--border-soft)'}"
           onclick="app.selectHeroSuit('${s.id}')">
           <div class="suit-card-emoji" style="background: ${s.bgGlow}">${s.icon}</div>
-          <div class="suit-card-badge">${s.badge}</div>
           <div class="suit-card-name">${s.name}</div>
-          <div class="suit-card-desc">${s.desc}</div>
+          <div class="suit-card-desc">${s.badge}</div>
         </button>`;
     }).join('');
 
     const bossesHtml = window.MATH_BOSSES.map(b => {
       const selected = b.id === this.heroConfig.bossId;
       return `
-        <button type="button" class="hero-boss-card ${selected ? 'selected-boss' : ''}"
+        <button type="button" class="hero-boss-card h-snap-chip ${selected ? 'selected-boss' : ''}"
           style="border-color: ${selected ? b.color : 'var(--border-soft)'}"
           onclick="app.selectHeroBoss('${b.id}')">
           <div class="boss-card-emoji">${b.icon}</div>
@@ -814,7 +813,7 @@ class MapleMathApp {
     }).join('');
 
     const strandPillsHtml = [
-      { id: 'all', icon: '🎲', name: 'All-Strand Hero Mix' },
+      { id: 'all', icon: '🎲', name: 'All Mix' },
       ...window.CURRICULUM_STRANDS
     ].map(st => {
       const selected = st.id === this.heroConfig.strandId;
@@ -826,40 +825,39 @@ class MapleMathApp {
     }).join('');
 
     return `
-      <section class="view-container">
+      <section class="view-container mobile-fit-view">
         <div class="hero-arena-header-card">
           <div class="hero-showcase-avatar" style="background: ${activeSuit.bgGlow}; border-color: ${activeSuit.color}">
             <span class="showcase-main">${activeSuit.icon}</span>
             <span class="showcase-badge">${activeSuit.badge}</span>
           </div>
           <div class="hero-showcase-info">
-            <div class="hero-rank-pill">${rankInfo.current.badge} ${rankInfo.current.title} • ⚡ ${prof.heroXp || 0} Hero XP • 🏆 ${prof.bossesDefeated || 0} Bosses Defeated</div>
-            <h1>⚡ MathHero Battle Headquarters (${gradeObj.name})</h1>
-            <p>Every correct math answer charges your <strong>${activeSuit.ultimateName}</strong> and blasts the Boss!</p>
+            <div class="hero-rank-pill">${rankInfo.current.badge} ${prof.heroXp || 0} XP • 🏆 ${prof.bossesDefeated || 0} Wins</div>
+            <h1>⚡ MathHero (${gradeObj.name})</h1>
           </div>
           <button type="button" class="btn-launch-hero-giant" onclick="app.launchHeroArenaBattle()">
-            ⚡ START HERO BATTLE! ▶
+            ⚡ BATTLE! ▶
           </button>
         </div>
 
         <div class="hero-builder-section">
-          <h2>1️⃣ Choose Your Superhero Suit & Power</h2>
-          <div class="hero-suits-grid">${suitsHtml}</div>
+          <h2>1️⃣ Hero Suit <span class="swipe-hint-inline">← Swipe →</span></h2>
+          <div class="hero-suits-grid h-carousel-row">${suitsHtml}</div>
         </div>
 
         <div class="hero-builder-section">
-          <h2>2️⃣ Choose Your Challenger Boss</h2>
-          <div class="hero-bosses-grid">${bossesHtml}</div>
+          <h2>2️⃣ Boss <span class="swipe-hint-inline">← Swipe →</span></h2>
+          <div class="hero-bosses-grid h-carousel-row">${bossesHtml}</div>
         </div>
 
         <div class="hero-builder-section">
-          <h2>3️⃣ Pick Math Power Strand & Battle Length (${gradeObj.name})</h2>
-          <div class="hero-strand-pills-row">${strandPillsHtml}</div>
+          <h2>3️⃣ Topic & Strikes</h2>
+          <div class="hero-strand-pills-row h-carousel-row">${strandPillsHtml}</div>
           <div class="hero-length-row">
             ${[5, 10, 15].map(n => `
               <button type="button" class="hero-len-btn ${this.heroConfig.questionCount === n ? 'active' : ''}"
                 onclick="app.selectHeroLength(${n})">
-                ⚡ ${n} Strikes (${n * 100} Boss HP)
+                ⚡ ${n} Strikes
               </button>
             `).join('')}
           </div>
@@ -916,7 +914,7 @@ class MapleMathApp {
       });
 
       return `
-        <div class="grade-select-card ${isSelected ? 'selected-grade-card' : ''}"
+        <div class="grade-select-card h-snap-card ${isSelected ? 'selected-grade-card' : ''}"
           style="background: ${g.bgGradient}; border-color: ${g.color}"
           onclick="app.selectGrade('${g.id}')">
           <div class="grade-card-top">
@@ -934,12 +932,12 @@ class MapleMathApp {
     }).join('');
 
     return `
-      <section class="view-container">
+      <section class="view-container mobile-fit-view">
         <div class="section-heading-box">
-          <h1>🇨🇦 Select Canadian Grade Framework (K–6)</h1>
-          <p>Aligned with the Pan-Canadian Common Curriculum Framework & Ontario 2020 Elementary Mathematics Standards.</p>
+          <h1>🇨🇦 Pick Your Grade (K–6)</h1>
+          <p>Swipe to choose your Canadian Grade level <span class="swipe-hint-inline">← Swipe →</span></p>
         </div>
-        <div class="grades-selection-grid">
+        <div class="grades-selection-grid h-carousel">
           ${cardsHtml}
         </div>
       </section>`;
@@ -1025,10 +1023,19 @@ class MapleMathApp {
     const currentQ = qState.questions[qState.currentIndex];
     window.soundEngine.playPop();
     window.soundEngine.speak(currentQ.hint);
-    const feedbackBox = document.getElementById('quest-feedback-banner');
-    if (feedbackBox && !qState.answeredCurrent) {
-      feedbackBox.className = 'quest-feedback-banner feedback-retry';
-      feedbackBox.innerHTML = `<div class="feedback-text">💡 <strong>Helper Tip:</strong> ${currentQ.hint}</div>`;
+    const modalRoot = document.getElementById('modal-root');
+    if (modalRoot) {
+      modalRoot.innerHTML = `
+        <div class="modal-backdrop" onclick="if(event.target===this) app.closeModal()">
+          <div class="modal-card hint-overlay-card">
+            <div class="modal-header">
+              <h3>${qState.isHeroMode ? '🛡️ Hero Scanner Tip' : '💡 Helper Tip'}</h3>
+              <button type="button" class="btn-close-icon" onclick="app.closeModal()">✕</button>
+            </div>
+            <p class="hint-overlay-text">${currentQ.hint}</p>
+            <button type="button" class="btn-primary-lg full-width" onclick="app.closeModal()">Got It! 👍🏻</button>
+          </div>
+        </div>`;
     }
   }
 
@@ -1170,7 +1177,7 @@ class MapleMathApp {
     const cardsHtml = window.CANADIAN_STICKERS.map(stk => {
       const isUnlocked = unlockedIds.includes(stk.id);
       return `
-        <div class="sticker-badge-card ${isUnlocked ? 'unlocked' : 'locked'}"
+        <div class="sticker-badge-card h-snap-card ${isUnlocked ? 'unlocked' : 'locked'}"
           onclick="window.soundEngine.playPop(); if(${isUnlocked}) window.soundEngine.speak('${stk.name}. ${stk.desc}')">
           <div class="sticker-icon-wrap">${isUnlocked ? stk.icon : '🔒'}</div>
           <h3 class="sticker-name">${stk.name}</h3>
@@ -1180,12 +1187,12 @@ class MapleMathApp {
     }).join('');
 
     return `
-      <section class="view-container">
+      <section class="view-container mobile-fit-view">
         <div class="section-heading-box">
-          <h1>🏅 ${prof.name}'s Canadian Wildlife & Heritage Sticker Book</h1>
-          <p>Collected <strong>${unlockedIds.length} of ${window.CANADIAN_STICKERS.length}</strong> Stickers • Total Stars: <strong>⭐ ${prof.stars || 0}</strong></p>
+          <h1>🏅 ${prof.name}'s Sticker Book</h1>
+          <p><strong>${unlockedIds.length} / ${window.CANADIAN_STICKERS.length}</strong> Stickers • ⭐ <strong>${prof.stars || 0}</strong> <span class="swipe-hint-inline">← Swipe →</span></p>
         </div>
-        <div class="stickers-book-grid">
+        <div class="stickers-book-grid h-carousel">
           ${cardsHtml}
         </div>
       </section>`;
